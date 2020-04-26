@@ -21,9 +21,6 @@ from django.conf.urls.static import static
 from django.contrib.sitemaps.views import sitemap
 from blog.sitemaps import HojavidaSitemap
 
-from django.config import settings as sett
-from django.config.static import static as statt
-
 
 sitemaps = {
     "posts": HojavidaSitemap,
@@ -39,6 +36,6 @@ urlpatterns = [
 
 #if settings.DEBUG:
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-urlpatterns += statt(sett.STATIC_URL, document_root=sett.STATIC_ROOT)
+urlpatterns += static(sett.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 handler404 = 'blog.views.page404'
