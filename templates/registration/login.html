@@ -1,48 +1,29 @@
 {% extends "base.html" %}
 
 {% block content %}
-<header class="masthead">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            <div class=" col-md-8 col-md-10 mx-auto">
-                <div class="site-heading">
-                    <h3 class=" site-heading my-4 mt-3 text-white"> Bienvenidos a Niñeras SOS </h3>
-                    <p class="text-light">Trabajamos duro para brindar el mejor servicio
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-</header>
+
+{% if user.is_authenticated %}
+
+Ya has iniciado sesión
+
+{% else %}
+
 <div class="container">
-    <div class="card-body">
-    <div class="row">
+    <h2>Autenticación</h2>
+    {% load crispy_forms_tags %}
+    <form action="" method="POST">
+        {% csrf_token %}
 
-        {% if user.is_authenticated %}
 
-        Ya has iniciado sesión
+        {{ form | crispy }}
 
-        {% else %}
 
-        <div class="container">
-            <h2>Autenticación</h2>
-            {% load crispy_forms_tags %}
-            <form action="" method="POST">
-                {% csrf_token %}
 
-                {{ form | crispy }}
-
-                <input type="submit" value="Iniciar sesión" class="btn btn-success float-right">
-            </form>
-        </div>
-
-        {% endif %}
-        {{ mensaje }}
-
-    </div>
+        <input type="submit" value="Iniciar sesión" class="btn btn-success float-right">
+    </form>
 </div>
-</div>
+
+{% endif %}
+{{ mensaje }}
 
 {%endblock%}
